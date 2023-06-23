@@ -3,7 +3,7 @@ export default function darkModeToggle() {
   const root = document.querySelector("html")
   const themeItems = []
 
-  const LOCAL_STORAGE_PREFIX = "DARKMODE-TOGGLE-gh-v18"
+  const LOCAL_STORAGE_PREFIX = "DARKMODE-TOGGLE-github"
   const DARKMODE_STORAGE_KEY = `${LOCAL_STORAGE_PREFIX}-theme`
 
   btnThemeToggle.addEventListener("click", (e) => {
