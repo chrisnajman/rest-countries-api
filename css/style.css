@@ -1,0 +1,522 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+:root {
+    --grid: grid;
+    --flex: flex;
+    --font-normal: 400;
+    --font-bold: 600;
+    --clr-header-footer: rgb(43, 55, 67);
+    --clr-button: rgb(0, 117, 255);
+    --clr-faux-select: #1e90ff;
+    --clr-highlight: rgb(135, 206, 235);
+    --clr-link: rgb(215, 234, 241);
+
+    /* Light theme */
+    --clr-body-bg: white;
+    --clr-card-bg: white;
+    --clr-icon-moon: white;
+    --clr-icon-search: black;
+    --clr-placeholder: rgb(156, 156, 156);
+    --clr-text: black;
+    --clr-shadow: -1px 4px 10px 0px rgba(0, 0, 0, 0.3);
+    --clr-img-border: black;
+}
+
+.dark-theme {
+    --clr-body-bg: rgb(26, 34, 41);
+    --clr-card-bg: rgb(43, 55, 67);
+    --clr-icon-moon: rgb(26, 34, 41);
+    --clr-icon-search: white;
+    --clr-placeholder: rgb(156, 156, 156);
+    --clr-text: white;
+    --clr-shadow: -1px 4px 10px 0px rgba(0, 0, 0, 1);
+    --clr-img-border: transparent;
+}
+
+html {
+    overflow-y: auto;
+    font-size: 16px;
+}
+
+body {
+    font-family: system-ui, sans-serif;
+    line-height: 1.5;
+    background-color: var(--clr-body-bg);
+    color: var(--clr-text);
+    font-size: 1rem;
+}
+
+a {
+    color: var(--clr-link);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.1;
+}
+
+h1 {
+    margin: 2.2em 0 1em 0;
+    color: white;
+    font-weight: var(--font-normal);
+    font-size: clamp(1.25rem, 0.8402rem + 2.0492vw, 2.5rem);
+}
+
+@media screen and (min-width: 600px) {
+    h1 {
+        margin-top: 1em;
+    }
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+:focus-visible {
+    outline: 3px solid var(--clr-highlight);
+}
+
+select {
+    max-width: 17.5rem;
+    font-size: inherit;
+    font-family: inherit;
+    text-overflow: ellipsis;
+    padding: 0.35rem 0.5rem;
+    outline: 1px solid var(--clr-text);
+    border: 0;
+    border-radius: 0.25rem;
+    background-color: var(--clr-body-bg);
+    color: currentColor;
+}
+
+button {
+    all: unset;
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+input[type="text"] {
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.page-layout {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: var(--grid);
+    grid-template-rows: auto 1fr auto;
+}
+
+.page-header {
+    position: relative;
+}
+
+.page-header,
+.page-footer {
+    text-align: center;
+    background-color: var(--clr-header-footer);
+}
+
+.main,
+.page-footer {
+    padding: 2rem 1rem;
+}
+
+.page-footer {
+    display: var(--flex);
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.main {
+    width: 100%;
+    max-width: 81rem;
+    margin: 0 auto;
+    padding: 0 1rem 4.75rem;
+}
+
+/** Search forms **/
+.filters {
+    display: var(--flex);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 3rem 0;
+}
+
+/* Show all countries button */
+.show-all-countries {
+    padding: 0.5rem 0.75rem;
+}
+
+/* Search for a country */
+.suggestions-form {
+    margin-right: auto;
+    position: relative;
+    flex-grow: 1;
+}
+
+.country-search {
+    padding: 0.35rem 0.5rem 0.35rem 2rem;
+    border: 0;
+    border-radius: 0.25rem;
+    outline: 1px solid var(--clr-text);
+    background-color: var(--clr-body-bg);
+    color: currentColor;
+    width: 100%;
+}
+.country-search:focus-within {
+    outline: 3px solid var(--clr-highlight);
+}
+.country-search::placeholder {
+    color: var(--clr-placeholder);
+}
+
+.icon-search {
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    top: 0.6rem;
+    left: 0.75rem;
+    z-index: 10;
+    fill: var(--clr-icon-search);
+}
+
+.suggestions {
+    list-style: none;
+    padding-left: 0;
+    position: absolute;
+    top: 100%;
+    z-index: 10;
+    background-color: white;
+    box-shadow: var(--clr-shadow);
+    max-height: 25.4375rem; /* Same height as search by countries select dropdown */
+    width: 100%;
+    overflow-y: auto;
+}
+
+.suggestions li {
+    cursor: default;
+    padding-left: 1rem;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding: 0.25rem 0 0.25rem 1rem;
+    line-height: 1.2;
+    background-color: var(--clr-body-bg);
+    color: currentColor;
+}
+.suggestions li:first-child {
+    border-top: 1px solid black;
+}
+.suggestions li:last-child {
+    border-bottom: 1px solid black;
+}
+.suggestions li:hover {
+    color: white;
+    background-color: var(--clr-faux-select);
+}
+.suggestions li:focus-within {
+    color: white;
+    background-color: var(--clr-faux-select);
+    outline: none;
+}
+
+/* Filter by country */
+.country-select option {
+    max-width: 100%;
+    overflow: hidden;
+    word-wrap: normal !important;
+    white-space: break-spaces;
+}
+
+.country-select option:before {
+    white-space: break-spaces;
+}
+
+/** Shared **/
+.country-details {
+    list-style: none;
+    padding-left: 0;
+    font-weight: var(--font-bold);
+}
+
+.country-details span {
+    font-weight: var(--font-normal);
+    padding-left: 0.25rem;
+}
+
+.button {
+    margin-left: auto;
+    background-color: var(--clr-button);
+    border-radius: 0.25rem;
+    color: white;
+    font-weight: var(--font-bold);
+}
+
+.button:hover {
+    opacity: 0.7;
+}
+
+.button:disabled,
+.button:hover:disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+}
+
+.borders-button,
+.country-view-details button {
+    padding: 0.25rem 0.5rem;
+}
+/** All flags display **/
+.countries-all {
+    --auto-grid-min-size: 14.5rem;
+    display: var(--grid);
+    grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+    grid-gap: 4.75rem;
+    list-style: none;
+    padding-left: 0;
+}
+
+.country-card {
+    display: var(--grid);
+    box-shadow: var(--clr-shadow);
+    background-color: var(--clr-card-bg);
+}
+
+.country-card-wrapper {
+    display: var(--grid);
+}
+
+.country-card-header {
+    display: var(--flex);
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.country-card-heading {
+    font-size: 1rem;
+    line-height: inherit;
+    padding: 0 1rem;
+}
+
+.country-card-image img {
+    margin-top: 0;
+    width: 100%;
+    border-bottom: 1px solid var(--clr-img-border);
+}
+
+@media screen and (min-width: 589px) {
+    .country-card-image img {
+        aspect-ratio: 2/1;
+        object-fit: cover;
+    }
+}
+
+.country-card-info {
+    padding: 1rem;
+    align-self: end;
+    display: var(--grid);
+    gap: 1.5rem;
+}
+
+.country-view-details {
+    display: var(--flex);
+}
+
+/** Country Detail */
+.country-card-detail-wrapper {
+    display: var(--flex);
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.country-detail-details {
+    line-height: 1.8;
+}
+
+.country-detail-image img {
+    border: 1px solid currentColor;
+}
+
+.country-detail-info > * {
+    margin-bottom: 1rem;
+}
+
+.country-detail-heading {
+    font-weight: var(--font-normal);
+}
+
+.borders-buttons-wrapper {
+    display: var(--flex);
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: baseline;
+    line-height: 1;
+    max-width: 26.75rem;
+    margin-bottom: 1.5rem;
+}
+
+@media screen and (min-width: 900px) {
+    .borders-buttons-wrapper {
+        flex-wrap: nowrap;
+    }
+}
+
+.borders-buttons-heading {
+    font-weight: var(--font-bold);
+    flex-shrink: 0;
+}
+
+.borders-button {
+    margin: 0 0.5rem 0.5rem 0;
+}
+
+.loading-message {
+    text-align: center;
+    font-size: 1.75rem;
+    animation: font_change 500ms infinite alternate;
+}
+
+@keyframes color_change {
+    from {
+        font-weight: var(--font-normal);
+    }
+    to {
+        color: 600;
+    }
+}
+
+/** Modal **/
+.modal {
+    padding: 2rem;
+    box-shadow: var(--clr-shadow);
+    border: 0;
+    background-color: var(--clr-card-bg);
+    color: currentColor;
+    z-index: 20;
+    margin: auto;
+    width: fit-content;
+}
+
+.modal::backdrop {
+    background-color: hsla(0, 0%, 0%, 0.8);
+    z-index: 15;
+}
+
+.close-modal {
+    display: var(--flex);
+}
+
+.close-modal button {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+/** Theme picker **/
+.theme-picker {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: fit-content;
+}
+
+.icon-moon {
+    width: 1.375rem;
+    height: 1.375rem;
+    margin-right: 0.5rem;
+}
+
+.btn-theme-toggle {
+    display: var(--flex);
+    align-items: center;
+    margin: 0 0 0 0.75rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0 0 0 0.5rem;
+    background-color: rgb(0, 117, 255);
+    background-color: var(--clr-button);
+    color: white;
+    font-weight: var(--font-bold);
+}
+
+.btn-theme-toggle:hover {
+    opacity: 0.7;
+}
+
+[aria-pressed] .icon-moon {
+    fill: var(--clr-icon-moon);
+}
+
+[aria-pressed="false"] .btn-theme-state::after {
+    content: ": off";
+}
+[aria-pressed="true"] .btn-theme-state::after {
+    content: ": on";
+}
+
+/* screenreader only */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(0);
+    border: 0;
+}
+
+/* Skip link */
+.skip-link {
+    background-color: var(--clr-button);
+    color: white;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 0 0 0.625rem 0; /* 10px */
+}
+.element-invisible {
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    z-index: 10;
+}
+.element-invisible.element-focusable:active,
+.element-invisible.element-focusable:focus {
+    clip: auto;
+    height: auto;
+    overflow: visible;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+        transition-delay: 0ms !important;
+    }
+}
+
+/** Always comes last **/
+.hide {
+    display: none;
+}

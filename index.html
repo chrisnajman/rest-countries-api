@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="./site.webmanifest">
+    <title>REST Countries API</title>
+    <meta name="description" content="Countries of the world, displayed using the Countries Rest API">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/script.js" type="module"></script>
+</head>
+
+<body>
+    <a href="#countries-all" class="element-invisible element-focusable skip-link">Skip to main content</a>
+    <!-- Modal -->
+    <dialog id="country-detail" data-country-detail-modal class="modal" aria-hidden="true">
+        <article class="country-card-detail-wrapper">
+            <div class="country-detail-image">
+                <img data-country-detail-img data-country-detail-img-alt loading="lazy">
+            </div>
+            <div class="country-detail-info">
+                <h2 class="country-detail-heading" data-country-detail-common-name></h2>
+                <ul class="country-detail-details country-details" role="list">
+                    <li>Official Name: <span data-country-detail-official-name></span></li>
+                    <li>Native Name: <span data-country-detail-native-name></span></li>
+                    <li>Population: <span data-country-detail-population></span></li>
+                    <li>Region: <span data-country-detail-region></span></li>
+                    <li>Sub Region: <span data-country-detail-sub-region></span></li>
+                    <li>Capital: <span data-country-detail-capital></span></li>
+                    <li>Top Level Domain: <span data-country-detail-tld></span></li>
+                    <li>Currencies: <span data-country-detail-currencies></span></li>
+                    <li>Languages: <span data-country-detail-languages></span></li>
+                </ul>
+                <div class="borders-buttons-wrapper">
+                    <span class="borders-buttons-heading">Border Countries:</span>
+                    <div data-country-detail-borders class="borders-buttons"></div>
+                </div>
+            </div>
+        </article>
+        <div class="close-modal">
+            <button type="button" data-country-detail-modal-close class="button">Close
+                <span class="visually-hidden"> (modal)</span>
+            </button>
+        </div>
+    </dialog>
+    <!-- END Modal -->
+    <div class="page-layout">
+        <header class="page-header">
+            <h1>REST Countries API</h1>
+            <form id="theme-picker" class="theme-picker">
+                <button type="button" id="btn-theme-toggle" class="btn-theme-toggle" aria-pressed>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-moon" aria-hidden="true">
+                        <path
+                            d="M12 11.807A9.002 9.002 0 0 1 10.049 2a9.942 9.942 0 0 0-5.12 2.735c-3.905 3.905-3.905 10.237 0 14.142 3.906 3.906 10.237 3.905 14.143 0a9.946 9.946 0 0 0 2.735-5.119A9.003 9.003 0 0 1 12 11.807z">
+                        </path>
+                    </svg>
+                    Dark Mode
+                    <span class="btn-theme-state" aria-hidden="true"></span></button>
+            </form>
+        </header>
+        <main class="main">
+            <h2 class="visually-hidden">All Countries</h2>
+            <div class="filters">
+                <form class="suggestions-form">
+                    <label for="country-search" class="visually-hidden">Search for a country</label>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-search" aria-hidden="true">
+                        <path
+                            d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z">
+                        </path>
+                    </svg>
+                    <input type="text" id="country-search" class="country-search" placeholder="Search for a country...">
+                    <ul id="suggestions" class="suggestions" role="list" aria-hidden="true"></ul>
+                </form>
+                <form class="country-select-form">
+                    <label for="country-select" class="visually-hidden">Filter by country:</label>
+                    <select name="country-select" id="country-select" class="country-select" data-country-select>
+                        <option value="">Filter by country</option>
+                    </select>
+                </form>
+                <form>
+                    <label for="country-select-region" class="visually-hidden">Filter by region:</label>
+                    <select name="country-select-region" id="country-select-region" class="country-select"
+                        data-country-select>
+                        <option value="" id="select-choose">Filter by region:</option>
+                        <option value="Africa">Africa</option>
+                        <option value="Americas">Americas</option>
+                        <option value="Antarctic">Antarctic</option>
+                        <option value="Asia">Asia</option>
+                        <option value="Europe">Europe</option>
+                        <option value="Oceania">Oceania</option>
+                    </select>
+                </form>
+                <form>
+                    <button type="button" class="button show-all-countries" data-show-all-btn disabled="true"
+                        aria-disabled="true">
+                        Show all countries
+                    </button>
+                </form>
+            </div>
+            <div id="loading-message" class="loading-message"></div>
+            <ul class="countries-all" id="countries-all" role="list"></ul>
+        </main>
+        <footer class="page-footer">
+            <a href="https://github.com/chrisnajman/rest-countries-api" target="_blank" rel="noopener noreferrer">GitHub
+                Repository &#10230;</a>
+        </footer>
+    </div>
+    <template id="country-template">
+        <li class="country-card" data-country-container>
+            <article class="country-card-wrapper">
+                <header class="country-card-header">
+                    <h3 class="country-card-heading" data-country-name></h3>
+                    <div class="country-card-image">
+                        <img data-country-img data-country-img-alt loading="lazy">
+                    </div>
+                </header>
+                <div class="country-card-info">
+                    <ul class="country-details" role="list">
+                        <li>Population: <span data-country-population></span></li>
+                        <li>Region: <span data-country-region></span></li>
+                        <li>Capital: <span data-country-capital></span></li>
+                    </ul>
+                    <div class="country-view-details">
+                        <button type="button" data-country-detail-btn class="button">View
+                            detail</button>
+                    </div>
+                </div>
+            </article>
+        </li>
+    </template>
+</body>
+
+</html>
