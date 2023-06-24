@@ -36,7 +36,7 @@ Users should be able to:
 
 ## Design Notes
 
-A) The design for the home page shows all the flags displaying in the same aspect ratio. In fact, the flags have various aspect ratios. The designer has picked out only those flags which have the same ratio so a decision had to be made. Either,
+A) The design for the home page shows all the flags displaying in the same aspect ratio. In fact, the flags have various aspect ratios. The designer has picked out only those flags which have the same ratio, so a decision had to be made. Either,
 
 1. make the flag container the same aspect ratio as the majority of the flags (which involves cropping) and preserving the design, or
 
