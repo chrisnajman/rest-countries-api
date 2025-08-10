@@ -410,7 +410,7 @@ input[type="text"] {
     color: currentColor;
     z-index: 20;
     margin: auto;
-    width: fit-content;
+    width: -moz-fit-content; width: fit-content;
 }
 
 .modal::backdrop {
@@ -432,7 +432,7 @@ input[type="text"] {
     position: absolute;
     top: 0;
     right: 0;
-    width: fit-content;
+    width: -moz-fit-content; width: fit-content;
 }
 
 .icon-moon {

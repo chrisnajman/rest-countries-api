@@ -134,11 +134,13 @@ export default function countryDetailBordersButtons(countries, country) {
 
       newBordersBtn.textContent = border
 
-      countries.forEach((ctry) => {
-        if (ctry.cca3 === newBordersBtn.textContent) {
-          newBordersBtn.textContent = ctry.name.common
-        }
-      })
+      // Commented this out because 'cca3' is (was?) a field but when I define it in
+      // COUNTRIES_REST_API, fields= the API fails.
+      // countries.forEach((ctry) => {
+      //   if (ctry.cca3 === newBordersBtn.textContent) {
+      //     newBordersBtn.textContent = ctry.name.common
+      //   }
+      // })
 
       // Event listener for each new border country button
       newBordersBtn.addEventListener("click", () => {
@@ -146,6 +148,7 @@ export default function countryDetailBordersButtons(countries, country) {
         const newBorderCountry = countries.find(
           (country) => country.name.common === newBordersBtn.textContent
         )
+        // console.log(newBorderCountry) // logs undefined
         if (newBorderCountry) {
           // Like fragment, requestAnimationFrame helps with repaint.
           window.requestAnimationFrame(() => {
