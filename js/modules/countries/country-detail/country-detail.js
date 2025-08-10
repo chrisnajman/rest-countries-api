@@ -114,7 +114,7 @@ export default function countryDetailBordersButtons(countries, country) {
   }
 
   // Border countries
-  const borders = country.borders
+  const borders = borders
   countryDetailBorders.textContent = ""
 
   // Generate borders buttons for relevant countries
@@ -140,7 +140,7 @@ export default function countryDetailBordersButtons(countries, country) {
       //   if (ctry.cca3 === newBordersBtn.textContent) {
       //     newBordersBtn.textContent = ctry.name.common
       //   }
-      // })
+      // }
 
       // Event listener for each new border country button
       newBordersBtn.addEventListener("click", () => {
