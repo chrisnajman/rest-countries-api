@@ -114,7 +114,7 @@ export default function countryDetailBordersButtons(countries, country) {
   }
 
   // Border countries
-  const borders = borders
+  const borders = country.borders
   countryDetailBorders.textContent = ""
 
   // Generate borders buttons for relevant countries
@@ -124,41 +124,46 @@ export default function countryDetailBordersButtons(countries, country) {
     const fragment = document.createDocumentFragment()
 
     borders.forEach((border) => {
-      const newBordersBtn = document.createElement("button")
+      // const newBordersBtn = document.createElement("button")
 
-      setMultipleAttributes(newBordersBtn, {
-        type: "button",
-        "data-border-btn": "",
-        class: "button borders-button",
-      })
+      // setMultipleAttributes(newBordersBtn, {
+      //   type: "button",
+      //   "data-border-btn": "",
+      //   class: "button borders-button",
+      // })
+
+      // 110825 - replace btn with span (as border countries no longer clickable)
+      const newBordersBtn = document.createElement("span")
+      newBordersBtn.classList.add("border-country")
 
       newBordersBtn.textContent = border
 
-      // Commented this out because 'cca3' is (was?) a field but when I define it in
+      // 110825 - Commented this out because 'cca3' is (was?) a field but when I define it in
       // COUNTRIES_REST_API, fields= the API fails.
       // countries.forEach((ctry) => {
       //   if (ctry.cca3 === newBordersBtn.textContent) {
       //     newBordersBtn.textContent = ctry.name.common
       //   }
-      // }
+      // })
 
+      // 110825 - remove event listener as button no longer working:
       // Event listener for each new border country button
-      newBordersBtn.addEventListener("click", () => {
-        // Call the function recursively to populate the popup and update border countries buttons for the clicked new border country
-        const newBorderCountry = countries.find(
-          (country) => country.name.common === newBordersBtn.textContent
-        )
-        // console.log(newBorderCountry) // logs undefined
-        if (newBorderCountry) {
-          // Like fragment, requestAnimationFrame helps with repaint.
-          window.requestAnimationFrame(() => {
-            // function  called recursively so that each time a new country
-            // loaded, all the border buttons are clickable
-            // Got help for this from ChatGPT
-            countryDetailBordersButtons(countries, newBorderCountry)
-          })
-        }
-      })
+      // newBordersBtn.addEventListener("click", () => {
+      //   // Call the function recursively to populate the popup and update border countries buttons for the clicked new border country
+      //   const newBorderCountry = countries.find(
+      //     (country) => country.name.common === newBordersBtn.textContent
+      //   )
+      //   // console.log(newBorderCountry) // logs undefined
+      //   if (newBorderCountry) {
+      //     // Like fragment, requestAnimationFrame helps with repaint.
+      //     window.requestAnimationFrame(() => {
+      //       // function  called recursively so that each time a new country
+      //       // loaded, all the border buttons are clickable
+      //       // Got help for this from ChatGPT
+      //       countryDetailBordersButtons(countries, newBorderCountry)
+      //     })
+      //   }
+      // })
 
       fragment.appendChild(newBordersBtn)
     })

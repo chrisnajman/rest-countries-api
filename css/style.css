@@ -23,7 +23,7 @@
     --clr-icon-search: black;
     --clr-placeholder: rgb(156, 156, 156);
     --clr-text: black;
-    --clr-shadow: -1px 4px 10px 0px rgba(0, 0, 0, 0.3);
+    --clr-shadow: -0.0625rem 0.25rem 0.625rem 0rem rgba(0, 0, 0, 0.3);
     --clr-img-border: black;
 }
 
@@ -34,13 +34,12 @@
     --clr-icon-search: white;
     --clr-placeholder: rgb(156, 156, 156);
     --clr-text: white;
-    --clr-shadow: -1px 4px 10px 0px rgba(0, 0, 0, 1);
+    --clr-shadow: -0.0625rem 0.25rem 0.625rem 0rem rgba(0, 0, 0, 1);
     --clr-img-border: transparent;
 }
 
 html {
     overflow-y: auto;
-    font-size: 16px;
 }
 
 body {
@@ -72,7 +71,7 @@ h1 {
     font-size: clamp(1.25rem, 0.8402rem + 2.0492vw, 2.5rem);
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 37.5rem) {
     h1 {
         margin-top: 1em;
     }
@@ -85,7 +84,7 @@ img {
 }
 
 :focus-visible {
-    outline: 3px solid var(--clr-highlight);
+    outline: 0.1875rem solid var(--clr-highlight);
 }
 
 select {
@@ -94,7 +93,7 @@ select {
     font-family: inherit;
     text-overflow: ellipsis;
     padding: 0.35rem 0.5rem;
-    outline: 1px solid var(--clr-text);
+    outline: 0.0625rem solid var(--clr-text);
     border: 0;
     border-radius: 0.25rem;
     background-color: var(--clr-body-bg);
@@ -174,13 +173,13 @@ input[type="text"] {
     padding: 0.35rem 0.5rem 0.35rem 2rem;
     border: 0;
     border-radius: 0.25rem;
-    outline: 1px solid var(--clr-text);
+    outline: 0.0625rem solid var(--clr-text);
     background-color: var(--clr-body-bg);
     color: currentColor;
     width: 100%;
 }
 .country-search:focus-within {
-    outline: 3px solid var(--clr-highlight);
+    outline: 0.1875rem solid var(--clr-highlight);
 }
 .country-search::placeholder {
     color: var(--clr-placeholder);
@@ -212,18 +211,18 @@ input[type="text"] {
 .suggestions li {
     cursor: default;
     padding-left: 1rem;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+    border-left: 0.0625rem solid black;
+    border-right: 0.0625rem solid black;
     padding: 0.25rem 0 0.25rem 1rem;
     line-height: 1.2;
     background-color: var(--clr-body-bg);
     color: currentColor;
 }
 .suggestions li:first-child {
-    border-top: 1px solid black;
+    border-top: 0.0625rem solid black;
 }
 .suggestions li:last-child {
-    border-bottom: 1px solid black;
+    border-bottom: 0.0625rem solid black;
 }
 .suggestions li:hover {
     color: white;
@@ -317,10 +316,10 @@ input[type="text"] {
 .country-card-image img {
     margin-top: 0;
     width: 100%;
-    border-bottom: 1px solid var(--clr-img-border);
+    border-bottom: 0.0625rem solid var(--clr-img-border);
 }
 
-@media screen and (min-width: 589px) {
+@media screen and (min-width: 36.8125rem) {
     .country-card-image img {
         aspect-ratio: 2/1;
         object-fit: cover;
@@ -350,7 +349,7 @@ input[type="text"] {
 }
 
 .country-detail-image img {
-    border: 1px solid currentColor;
+    border: 0.0625rem solid currentColor;
 }
 
 .country-detail-info > * {
@@ -359,6 +358,12 @@ input[type="text"] {
 
 .country-detail-heading {
     font-weight: var(--font-normal);
+}
+
+.borders-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
 }
 
 .borders-buttons-wrapper {
@@ -371,7 +376,7 @@ input[type="text"] {
     margin-bottom: 1.5rem;
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 56.25rem) {
     .borders-buttons-wrapper {
         flex-wrap: nowrap;
     }
@@ -410,7 +415,8 @@ input[type="text"] {
     color: currentColor;
     z-index: 20;
     margin: auto;
-    width: -moz-fit-content; width: fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
 }
 
 .modal::backdrop {
@@ -432,7 +438,8 @@ input[type="text"] {
     position: absolute;
     top: 0;
     right: 0;
-    width: -moz-fit-content; width: fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
 }
 
 .icon-moon {
@@ -471,10 +478,10 @@ input[type="text"] {
 /* screenreader only */
 .visually-hidden {
     position: absolute;
-    width: 1px;
-    height: 1px;
+    width: 0.0625rem;
+    height: 0.0625rem;
     padding: 0;
-    margin: -1px;
+    margin: -0.0625rem;
     overflow: hidden;
     clip-path: inset(0);
     border: 0;
@@ -486,11 +493,11 @@ input[type="text"] {
     color: white;
     font-weight: 600;
     padding: 0.5rem 1rem;
-    border-radius: 0 0 0.625rem 0; /* 10px */
+    border-radius: 0 0 0.625rem 0; /* 0.625rem */
 }
 .element-invisible {
-    clip: rect(1px, 1px, 1px, 1px);
-    height: 1px;
+    clip: rect(0.0625rem, 0.0625rem, 0.0625rem, 0.0625rem);
+    height: 0.0625rem;
     overflow: hidden;
     position: absolute;
     left: 0;

@@ -37,6 +37,7 @@ Users should be able to:
   - **Update 11/08/25**:
     - Border country buttons no longer working.
     - Unable to work out why this is. (Could it be related to the now unavailable `cca3` field?)
+    - **Temp solution**: output border countries as `<span>`s and remove button event listeners.
 
 - Toggle the color scheme between light and dark mode.
 
