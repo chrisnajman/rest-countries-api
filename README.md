@@ -8,6 +8,11 @@ My comments are in **bold**.
 
 Integrate with the [REST Countries API](https://restcountries.com) to pull country data and display it [as per] the designs (but see **Design Notes**, below).
 
+- **Update 11/08/25**:
+  - Former path to API (`https://restcountries.com/v3.1/all`) no longer working.
+  - All fields must now be defined: `https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital,subregion,currencies,tld,languages,borders`
+  - One field, `cca3` no longer available, so it has been commented out in `country-detail.js`.
+
 Users should be able to:
 
 - See all countries from the API on the homepage.
@@ -28,7 +33,10 @@ Users should be able to:
 
 - Click through to the border countries on the detail page
 
-  - **Achieved** (but with some outside help -- see **Credits**, below.)
+  - ~~**Achieved** (but with some outside help -- see **Credits**, below.)~~
+  - **Update 11/08/25**:
+    - Border country buttons no longer working.
+    - Unable to work out why this is. (Could it be related to the now unavailable `cca3` field?)
 
 - Toggle the color scheme between light and dark mode.
 
@@ -73,7 +81,7 @@ All items are navigable via the keyboard.
 
 ## Credits
 
-- I got into difficulties trying to work out the recursion of the borders buttons in the country detail modal. (Clicking on one of these buttons will not only load the target country's details, but also the corresponding borders buttons for that country). 'A back-and-forth with [ChatGPT](https://chat.openai.com/) helped me to understand how recursion worked.
+- ~~I got into difficulties trying to work out the recursion of the borders buttons in the country detail modal. (Clicking on one of these buttons will not only load the target country's details, but also the corresponding borders buttons for that country). 'A back-and-forth with [ChatGPT](https://chat.openai.com/) helped me to understand how recursion worked.~~
 - The code for the 'Search for a country...' autocomplete input is a customised version of a [script](https://stackoverflow.com/questions/71177851/how-to-make-autocomplete-in-javascript) by [Sarkar](https://stackoverflow.com/users/13741787/sarkar) (a StackOverflow contributor).
 - Finally, I customised a [script](https://stackoverflow.com/questions/36676701/how-can-i-set-the-width-of-select-box-options) by [Ellipsis](https://stackoverflow.com/users/6766919/ellipsis) (another StackOverflow contributor) which truncates extra-long text in the 'Filter by country' select dropdown.
 
